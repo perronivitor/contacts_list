@@ -11,17 +11,17 @@ import com.example.contacts_list_app.databinding.FragmentContactsListBinding
 
 class ContactsListFragment : Fragment() {
 
-    private var _binding : FragmentContactsListBinding? = null
-    val binding : FragmentContactsListBinding get() = _binding!!
+    private var _binding: FragmentContactsListBinding? = null
+    val binding: FragmentContactsListBinding get() = _binding!!
 
-    private val viewModel : ContactsViewModel by viewModels()
+    private val viewModel: ContactsViewModel by viewModels()
 
-    private lateinit var contactAdapter : ContactsAdapter
+    private lateinit var contactAdapter: ContactsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentContactsListBinding.inflate(inflater,container,false).apply {
+    ) = FragmentContactsListBinding.inflate(inflater, container, false).apply {
         _binding = this
     }.root
 
@@ -33,14 +33,14 @@ class ContactsListFragment : Fragment() {
 
     private fun observerInitialLoadState() {
 
-//            viewModel.contactsList.observe(viewLifecycleOwner){ contacts ->
-//
-//            }
+        viewModel.contactsList.observe(viewLifecycleOwner) { contacts ->
+
+        }
 
     }
 
     private fun initContactsListAdapter(list: List<Contact>) {
-        with(binding.recyclerContacts){
+        with(binding.recyclerContacts) {
             setHasFixedSize(true)
             adapter = ContactsAdapter(list)
         }
