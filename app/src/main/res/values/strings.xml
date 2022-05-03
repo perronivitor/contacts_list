@@ -1,8 +1,19 @@
 <resources>
     <string name="app_name">contacts_list_app</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Contact Activity-->
     <string name="erro_ao_carregar_lista">Erro ao carregar a lista</string>
-    <string name="tentar_novamente">Tentar novamente</string>
+    <string name="tentar_novamente">Retry</string>
+
+    <!-- Forms -->
     <string name="content_illustration_person_contact">Image illustration a person</string>
+    <string name="dados_pessoais">Personal Data</string>
+    <string name="save">Save</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="second_name">Second Name</string>
+    <string name="first_name">First Name</string>
+    <string name="label_contact_fragment">Contacts List</string>
+    <string name="save_contact_fragment">Save Contact</string>
+
+
 </resources>

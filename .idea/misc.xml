@@ -3,12 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.16974358974358975" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.1675" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1675" />
         <entry key="app/src/main/res/drawable/ic_baseline_contact_phone_24.xml" value="0.1675" />
         <entry key="app/src/main/res/drawable/ic_dissatisfied.xml" value="0.1675" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23007246376811594" />
         <entry key="app/src/main/res/layout/fragment_contacts_list.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_visualization.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_contact.xml" value="0.35520833333333335" />
       </map>
     </option>

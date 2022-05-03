@@ -1,20 +1,22 @@
-package com.example.contacts_list_app.ui
+package com.example.contacts_list_app.ui.contacts
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import com.example.contacts_list_app.Contact
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.contacts_list_app.R
 import com.example.contacts_list_app.databinding.FragmentContactsListBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ContactsListFragment : Fragment() {
 
     private var _binding: FragmentContactsListBinding? = null
     val binding: FragmentContactsListBinding get() = _binding!!
 
-    private val viewModel: ContactsViewModel by viewModels()
+    private val viewModel: ContactsViewModel by viewModel()
 
     private lateinit var contactAdapter: ContactsAdapter
 
@@ -27,22 +29,41 @@ class ContactsListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initContactsListAdapter()
         observerInitialLoadState()
 
+        listeners()
+
+    }
+
+    private fun listeners() {
+        with(binding) {
+            addContactButton.setOnClickListener {
+                findNavController()
+                    .navigate(R.id.action_contactsListFragment_to_saveContactFragment)
+            }
+        }
     }
 
     private fun observerInitialLoadState() {
 
         viewModel.contactsList.observe(viewLifecycleOwner) { contacts ->
-
+            contactAdapter.addContacts(contacts)
         }
+
+        viewModel.viewPagerChild.observe(viewLifecycleOwner) { child ->
+            binding.contactViewFlipper.displayedChild = child
+        }
+
 
     }
 
-    private fun initContactsListAdapter(list: List<Contact>) {
+    private fun initContactsListAdapter() {
         with(binding.recyclerContacts) {
             setHasFixedSize(true)
-            adapter = ContactsAdapter(list)
+            layoutManager = LinearLayoutManager(requireContext())
+            contactAdapter = ContactsAdapter()
+            adapter = contactAdapter
         }
     }
 

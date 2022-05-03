@@ -6,9 +6,17 @@
     app:startDestination="@id/contactsListFragment">
     <fragment
         android:id="@+id/contactsListFragment"
-        android:name="com.example.contacts_list_app.ui.ContactsListFragment"
-        android:label="Lista de Contatos"
-        tools:layout="@layout/fragment_contacts_list" />
+        android:name="com.example.contacts_list_app.ui.contacts.ContactsListFragment"
+        android:label="@string/label_contact_fragment"
+        tools:layout="@layout/fragment_contacts_list" >
+        <action
+            android:id="@+id/action_contactsListFragment_to_saveContactFragment"
+            app:destination="@id/saveContactFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saveContactFragment"
+        android:name="com.example.contacts_list_app.ui.save.SaveContactFragment"
+        android:label="@string/save_contact_fragment" />
 
 
 </navigation>

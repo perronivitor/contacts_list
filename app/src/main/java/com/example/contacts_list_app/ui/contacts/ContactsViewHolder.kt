@@ -1,4 +1,4 @@
-package com.example.contacts_list_app.ui
+package com.example.contacts_list_app.ui.contacts
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -15,7 +15,7 @@ class ContactsViewHolder(itemContactBinding : ItemContactBinding) : RecyclerView
     }
 
     companion object{
-        fun create(parent: ViewGroup) : ContactsViewHolder{
+        fun create(parent: ViewGroup) : ContactsViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             val itemBInding = ItemContactBinding.inflate(inflater,parent,false)
             return ContactsViewHolder(itemBInding)
