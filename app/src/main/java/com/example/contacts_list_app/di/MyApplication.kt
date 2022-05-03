@@ -15,7 +15,13 @@ class MyApplication : Application() {
             androidLogger(Level.ERROR)
             androidContext(this@MyApplication)
 
-            modules(mainModule)
+            modules(
+                listOf(
+                    mainModule,
+                    contactDataBase
+                )
+
+            )
         }
     }
 }

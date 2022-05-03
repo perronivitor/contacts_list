@@ -3,8 +3,8 @@ package com.example.contacts_list_app.ui.contacts
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.contacts_list_app.Contact
 import com.example.contacts_list_app.data.local.ContactsRepository
+import com.example.contacts_list_app.data.local.model.Contact
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

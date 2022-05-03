@@ -2,7 +2,7 @@ package com.example.contacts_list_app.ui.contacts
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.contacts_list_app.Contact
+import com.example.contacts_list_app.data.local.model.Contact
 
 class ContactsAdapter : RecyclerView.Adapter<ContactsViewHolder>(){
 

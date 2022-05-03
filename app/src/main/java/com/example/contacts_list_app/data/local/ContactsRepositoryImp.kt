@@ -1,6 +1,6 @@
 package com.example.contacts_list_app.data.local
 
-import com.example.contacts_list_app.Contact
+import com.example.contacts_list_app.data.local.model.Contact
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -16,10 +16,14 @@ interface ContactsRepository {
     suspend fun getAllContacts(): List<Contact>
 }
 
-class ContactsRepositoryImp : ContactsRepository {
+class ContactsRepositoryImp(private val contactDao: ContactDao) : ContactsRepository {
 
     var mockList = mutableListOf(
-        Contact(firstName = "Vitor", lastName = "Perroni", numberPhone = "47 996699001"),
+        Contact(
+            firstName = "Vitor",
+            lastName = "Perroni",
+            phoneNumber = "47 996699001",
+        ),
     )
 
     override suspend fun save(contact: Contact) {

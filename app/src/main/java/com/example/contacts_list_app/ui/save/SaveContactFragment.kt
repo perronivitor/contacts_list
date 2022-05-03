@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.contacts_list_app.Contact
+import com.example.contacts_list_app.data.local.model.Contact
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.contacts_list_app.databinding.FragmentSaveContactBinding
 
@@ -15,12 +15,12 @@ class SaveContactFragment : Fragment() {
     private var _binding: FragmentSaveContactBinding? = null
     private val binding: FragmentSaveContactBinding get() = _binding!!
 
-    private val viewModel : SaveContactViewModel by viewModel()
+    private val viewModel: SaveContactViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentSaveContactBinding.inflate(inflater,container,false).apply {
+    ) = FragmentSaveContactBinding.inflate(inflater, container, false).apply {
         _binding = this
     }.root
 
@@ -29,21 +29,23 @@ class SaveContactFragment : Fragment() {
 
         listeners()
 
-        viewModel.isBackContactFragment.observe(viewLifecycleOwner){isBack ->
-            if(isBack){
+        viewModel.isBackContactFragment.observe(viewLifecycleOwner) { isBack ->
+            if (isBack) {
                 findNavController().navigateUp()
             }
         }
     }
 
     private fun listeners() {
-        with(binding){
+        with(binding) {
             formButtonSave.setOnClickListener {
-                viewModel.save(Contact(
-                    "teste",
-                    "save",
-                    "47 999999999"
-                ))
+                viewModel.save(
+                    Contact(
+                        firstName = "teste",
+                        lastName = "save",
+                        phoneNumber = "47 999999999"
+                    )
+                )
             }
         }
     }
