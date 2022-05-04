@@ -22,5 +22,6 @@ que conta com disponibilidade para os idiomas INGLES :us: e PORTUGUÊS :brazil:.
 * Divisão em Modulos
 * Dar possibilidade de adicionar imagens aos contatos
 * Adicionar FLOW
+* Implementar testes
 
 ## 👨‍💻 Atenciosamente Dev Vitor Perroni 🙋‍♂️
