@@ -15,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".ui.contacts.ContactsListFragment">
 
+
         <ProgressBar
             android:id="@+id/progress_bar_contacts_list"
             android:layout_width="wrap_content"
@@ -27,6 +28,16 @@
             android:layout_height="wrap_content"
             tools:listitem="@layout/item_contact" />
 
+        <TextView
+            android:id="@+id/message_empty_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/empty_list"
+            android:textAlignment="center"
+            android:textSize="32sp"
+            android:layout_gravity="center"
+            app:drawableTopCompat="@drawable/ic_dissatisfied" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -1,7 +1,6 @@
 package com.example.contacts_list_app.di
 
 import android.app.Application
-import android.content.Context
 import androidx.room.Room
 import com.example.contacts_list_app.data.local.ContactDao
 import com.example.contacts_list_app.data.local.ContactRoomDatabase

@@ -17,6 +17,7 @@
     <string name="delete">delete</string>
     <string name="number_digits_number_phone">Phone must be between 10 and 11 digits</string>
     <string name="required_field">Required field</string>
+    <string name="empty_list">Empty list</string>
 
 
 </resources>

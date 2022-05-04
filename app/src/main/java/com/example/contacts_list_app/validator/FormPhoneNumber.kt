@@ -1,7 +1,9 @@
 package com.example.contacts_list_app.validator
 
+import android.app.Activity
+import android.content.Context
 import com.example.contacts_list_app.R
-import com.example.contacts_list_app.di.StringsMyApp
+import com.example.contacts_list_app.di.MyApplication
 import com.google.android.material.textfield.TextInputLayout
 
 
@@ -24,9 +26,12 @@ class FormPhoneNumber {
     }
 }
 
-class ValidFormNumberWithDDD(private val textInputLayout: TextInputLayout): Validator{
+class ValidFormNumberWithDDD(
+    private val context : Context,
+    private val textInputLayout: TextInputLayout
+    ): Validator{
 
-    private val validDefault = ValidatorDefault(textInputLayout)
+    private val validDefault = ValidatorDefault(context,textInputLayout)
     private val editText get() = textInputLayout.editText
     private val telefone get() = editText?.text.toString()
 
@@ -34,7 +39,7 @@ class ValidFormNumberWithDDD(private val textInputLayout: TextInputLayout): Vali
     private fun validBetweenTenOrELevenDigits(telefone : String): Boolean {
         val digits = telefone.length
         if (digits < 10 || digits > 11) {
-            textInputLayout.error = StringsMyApp.errorNumberDigitsPhone
+            textInputLayout.error = context.getString(R.string.number_digits_number_phone)
             return false
         }
         return true
@@ -56,14 +61,14 @@ class ValidFormNumberWithDDD(private val textInputLayout: TextInputLayout): Vali
 
 }
 
-class ValidatorDefault(val textInputLayout : TextInputLayout) : Validator{
+class ValidatorDefault(val context : Context, val textInputLayout : TextInputLayout) : Validator {
 
     private fun validRequiredField(): Boolean {
         val editText = textInputLayout.editText
         val text = editText?.text.toString()
         if (text.isEmpty()) {
             textInputLayout.isErrorEnabled = true
-            textInputLayout.error = StringsMyApp.requiredField
+            textInputLayout.error = context.getString(R.string.required_field)
             return false
         }
         return true

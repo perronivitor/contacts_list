@@ -131,7 +131,7 @@ class SaveContactFragment : Fragment() {
     }
 
     private fun addValidatorDefault(textInputLayout: TextInputLayout) {
-        val validator = ValidatorDefault(textInputLayout)
+        val validator = ValidatorDefault(requireContext(),textInputLayout)
         validators.add(validator)
         textInputLayout.editText?.setOnFocusChangeListener { view, hasFocus ->
             if (validator.isValid()) return@setOnFocusChangeListener
@@ -140,9 +140,9 @@ class SaveContactFragment : Fragment() {
 
     private fun confFieldPhoneNumber(textFieldPhone: TextInputLayout) {
         val editTextPhone = textFieldPhone.editText
-        val validatorPhone = ValidFormNumberWithDDD(textFieldPhone)
+        val validatorPhone = ValidFormNumberWithDDD(requireContext(),textFieldPhone)
         val format = FormPhoneNumber()
-        validators.add(ValidFormNumberWithDDD(textFieldPhone))
+        validators.add(ValidFormNumberWithDDD(requireContext(),textFieldPhone))
         editTextPhone?.setOnFocusChangeListener { view, hasFocus ->
             val phone = editTextPhone.text.toString()
             if (hasFocus) {
