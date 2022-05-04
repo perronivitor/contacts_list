@@ -13,13 +13,13 @@ data class Contact(
     @PrimaryKey (autoGenerate = true)
     val id: Int = 0,
 
-    @ColumnInfo(name = "first_name")
+    @ColumnInfo(name = "first_name", defaultValue = "")
     val firstName: String,
 
-    @ColumnInfo(name = "last_name")
+    @ColumnInfo(name = "last_name", defaultValue = "")
     val lastName: String,
 
-    @ColumnInfo(name = "phone_number")
+    @ColumnInfo(name = "phone_number", defaultValue = "")
     val phoneNumber: String,
 
 ) : Parcelable

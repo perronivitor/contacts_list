@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.view.get
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -44,23 +45,30 @@ class SaveContactFragment : Fragment() {
 
         getArgs()
 
+        observer()
+    }
+
+    private fun observer() {
         viewModel.isBackContactFragment.observe(viewLifecycleOwner) { isBack ->
             if (isBack) {
                 findNavController().navigateUp()
             }
         }
 
-        viewModel.isSHowMessageSuccess.observe(viewLifecycleOwner) { isShow ->
+        viewModel.isShowMessageSuccess.observe(viewLifecycleOwner) { isShow ->
             if (isShow) {
                 messageSuccess()
             }
         }
 
-        viewModel.contact.observe(viewLifecycleOwner){ contact ->
+        viewModel.contact.observe(viewLifecycleOwner) { contact ->
             contact?.let {
-             binding.formFirstName.editText?.setText(it.firstName)
-             binding.formSecondeName.editText?.setText(it.lastName)
-             binding.formPhoneNumber.editText?.setText(it.phoneNumber)
+
+                binding.formFirstName.editText?.setText(it.firstName)
+                binding.formSecondeName.editText?.setText(it.lastName)
+                binding.formPhoneNumber.editText?.setText(it.phoneNumber)
+
+                deleteButtonIsVisible(true)
             }
         }
     }
@@ -91,13 +99,28 @@ class SaveContactFragment : Fragment() {
 
             confFieldPhoneNumber(formPhoneNumber)
 
+            confButtonDeleteContact(formButtonDelete)
+        }
+    }
+
+    private fun confButtonDeleteContact(formButtonSave: Button) {
+        formButtonSave.setOnClickListener {
+            viewModel.delete(
+                with(binding) {
+                    Contact(
+                        firstName = formFirstName.editText?.text.toString(),
+                        lastName = formSecondeName.editText?.text.toString(),
+                        phoneNumber = formPhoneNumber.editText?.text.toString()
+                    )
+                }
+            )
         }
     }
 
     private fun confButtonSaveContact(formButtonSave: Button) {
         formButtonSave.setOnClickListener {
             if (formIsValid()) {
-                viewModel.save(
+                viewModel.actionButton(
                     with(binding) {
                         Contact(
                             firstName = formFirstName.editText?.text.toString(),
@@ -108,6 +131,10 @@ class SaveContactFragment : Fragment() {
                 )
             }
         }
+    }
+
+    private fun deleteButtonIsVisible(isVisible: Boolean) {
+        binding.formButtonDelete.isVisible = isVisible
     }
 
     private fun addValidatorPadrao(textInputLayout: TextInputLayout) {

@@ -83,7 +83,6 @@ class ContactsListFragment : Fragment() {
         )
     }
 
-
     companion object {
         const val FLIPPER_CHILD_LOADING = 0
         const val FLIPPER_CHILD_CONTACTS = 1

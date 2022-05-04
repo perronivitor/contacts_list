@@ -18,14 +18,6 @@ interface ContactsRepository {
 
 class ContactsRepositoryImp(private val contactDao: ContactDao) : ContactsRepository {
 
-    var mockList = mutableListOf(
-        Contact(
-            firstName = "Vitor",
-            lastName = "Perroni",
-            phoneNumber = "47 996699001",
-        ),
-    )
-
     override suspend fun save(contact: Contact) {
         withContext(Dispatchers.IO) {
             contactDao.save(contact)
@@ -33,9 +25,17 @@ class ContactsRepositoryImp(private val contactDao: ContactDao) : ContactsReposi
     }
 
     override suspend fun delete(contact: Contact) {
+        withContext(Dispatchers.IO){
+            println("DELETANDO CONTATO PARA $contact")
+            contactDao.delete(contact)
+        }
     }
 
     override suspend fun edit(contact: Contact) {
+        withContext(Dispatchers.IO){
+            println("EDITANDO CONTATO PARA $contact")
+            contactDao.edit(contact)
+        }
     }
 
     override suspend fun getAllContacts(): List<Contact> {

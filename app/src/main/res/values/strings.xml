@@ -14,6 +14,7 @@
     <string name="first_name">First Name</string>
     <string name="label_contact_fragment">Contacts List</string>
     <string name="save_contact_fragment">Save Contact</string>
+    <string name="delete">delete</string>
 
 
 </resources>

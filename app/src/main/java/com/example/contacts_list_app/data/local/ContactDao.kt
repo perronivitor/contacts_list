@@ -17,7 +17,7 @@ interface ContactDao{
     @Delete
     suspend fun delete(contact: Contact)
 
-    @Update
+    @Update(entity = Contact::class)
     suspend fun edit(contact: Contact)
 
 }

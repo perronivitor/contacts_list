@@ -20,8 +20,6 @@ class ContactsAdapter(private val clickItem: (Contact) -> Unit) :
                 clickItem(contact)
             }
         }
-
-
     }
 
     override fun getItemCount(): Int {
@@ -30,6 +28,7 @@ class ContactsAdapter(private val clickItem: (Contact) -> Unit) :
 
     fun addContacts(contacts: List<Contact>?) {
         this.contacts = contacts
+        //Implementar no futuro DiffUtils para melhor desempenho na atualização da lista.
         notifyDataSetChanged()
     }
 }
