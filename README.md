@@ -17,9 +17,10 @@ que conta com disponibilidade para os idiomas INGLES :us: e PORTUGUÊS :brazil:.
 ---
 
 ## :writing_hand:Proximas etapas
-* Melhorar o LAyout das telas
+* Melhorar o Layout das telas
 * Melhorar arquitetura do Projeto
 * Divisão em Modulos
 * Dar possibilidade de adicionar imagens aos contatos
+* Adicionar FLOW
 
 ## 👨‍💻 Atenciosamente Dev Vitor Perroni 🙋‍♂️
