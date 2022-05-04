@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.contacts_list_app.data.local.ContactsRepository
 import com.example.contacts_list_app.data.local.model.Contact
+import com.example.contacts_list_app.ui.contacts.ContactsListFragment.Companion.FLIPPER_CHILD_CONTACTS
+import com.example.contacts_list_app.ui.contacts.ContactsListFragment.Companion.FLIPPER_CHILD_ERROR
+import com.example.contacts_list_app.ui.contacts.ContactsListFragment.Companion.FLIPPER_CHILD_LOADING
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -18,20 +21,19 @@ class ContactsViewModel(private val repository: ContactsRepository) : ViewModel(
         getContacts()
     }
 
-    private fun getContacts() = viewModelScope.launch(Dispatchers.IO) {
-        viewPagerChild.postValue(0)
+    fun getContacts() = viewModelScope.launch(Dispatchers.IO) {
+        viewPagerChild.postValue(FLIPPER_CHILD_LOADING)
         try {
 
             val repo = repository.getAllContacts()
 
-            viewPagerChild.postValue(if (repo.isNullOrEmpty()) 2 else {
+            viewPagerChild.postValue(if (repo.isNullOrEmpty()) FLIPPER_CHILD_ERROR else {
                 contactsList.postValue(repo)
-                1
+                FLIPPER_CHILD_CONTACTS
             })
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
-
     }
 }

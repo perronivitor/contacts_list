@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contacts_list_app.R
+import com.example.contacts_list_app.data.local.model.Contact
 import com.example.contacts_list_app.databinding.FragmentContactsListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,6 +37,11 @@ class ContactsListFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getContacts()
+    }
+
     private fun listeners() {
         with(binding) {
             addContactButton.setOnClickListener {
@@ -55,23 +61,33 @@ class ContactsListFragment : Fragment() {
             binding.contactViewFlipper.displayedChild = child
         }
 
-
     }
 
     private fun initContactsListAdapter() {
         with(binding.recyclerContacts) {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
-            contactAdapter = ContactsAdapter()
+            contactAdapter = ContactsAdapter { contact ->
+                navToEditOrDeleteContact(contact)
+            }
+
             adapter = contactAdapter
         }
     }
 
+    private fun navToEditOrDeleteContact(contact: Contact) {
+        findNavController().navigate(
+            directions = ContactsListFragmentDirections
+                .actionContactsListFragmentToSaveContactFragment()
+                .setContact(contact)
+        )
+    }
+
 
     companion object {
-        private const val FLIPPER_CHILD_LOADING = 0
-        private const val FLIPPER_CHILD_CONTACTS = 1
-        private const val FLIPPER_CHILD_ERROR = 2
+        const val FLIPPER_CHILD_LOADING = 0
+        const val FLIPPER_CHILD_CONTACTS = 1
+        const val FLIPPER_CHILD_ERROR = 2
     }
 
 }

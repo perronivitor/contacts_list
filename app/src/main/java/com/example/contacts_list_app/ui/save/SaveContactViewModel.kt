@@ -13,15 +13,25 @@ class SaveContactViewModel(private val repository: ContactsRepository) : ViewMod
 
     var isBackContactFragment = MutableLiveData(false)
 
+    var isSHowMessageSuccess = MutableLiveData(false)
+
+    private var _contact = MutableLiveData<Contact>()
+    val contact get() = _contact
+
     fun save(contact: Contact) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 repository.save(contact)
+                isSHowMessageSuccess.postValue(true)
                 isBackContactFragment.postValue(true)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
+    }
+
+    fun setContact(contact: Contact){
+        this._contact.postValue(contact)
     }
 
 }

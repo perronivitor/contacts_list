@@ -28,7 +28,7 @@ class ContactsRepositoryImp(private val contactDao: ContactDao) : ContactsReposi
 
     override suspend fun save(contact: Contact) {
         withContext(Dispatchers.IO) {
-            mockList.add(contact)
+            contactDao.save(contact)
         }
     }
 
@@ -40,7 +40,7 @@ class ContactsRepositoryImp(private val contactDao: ContactDao) : ContactsReposi
 
     override suspend fun getAllContacts(): List<Contact> {
         return withContext(Dispatchers.IO) {
-            mockList
+            contactDao.getAllContacts()
         }
     }
 }
