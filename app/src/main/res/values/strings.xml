@@ -2,12 +2,12 @@
     <string name="app_name">contacts_list_app</string>
 
     <!--Contact Activity-->
-    <string name="erro_ao_carregar_lista">Erro ao carregar a lista</string>
-    <string name="tentar_novamente">Retry</string>
+    <string name="error_loading_list">Error loading list</string>
+    <string name="retry">Retry</string>
 
     <!-- Forms -->
     <string name="content_illustration_person_contact">Image illustration a person</string>
-    <string name="dados_pessoais">Personal Data</string>
+    <string name="person_data">Personal Data</string>
     <string name="save">Save</string>
     <string name="phone_number">Phone Number</string>
     <string name="second_name">Second Name</string>
@@ -15,6 +15,8 @@
     <string name="label_contact_fragment">Contacts List</string>
     <string name="save_contact_fragment">Save Contact</string>
     <string name="delete">delete</string>
+    <string name="number_digits_number_phone">Phone must be between 10 and 11 digits</string>
+    <string name="required_field">Required field</string>
 
 
 </resources>

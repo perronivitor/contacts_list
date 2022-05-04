@@ -13,7 +13,7 @@ class SaveContactViewModel(private val repository: ContactsRepository) : ViewMod
 
     var isBackContactFragment = MutableLiveData(false)
 
-    var isShowMessageSuccess = MutableLiveData(false)
+    var isShowMessageSuccess = MutableLiveData("")
 
     private var _contact = MutableLiveData<Contact>()
     val contact get() = _contact
@@ -22,7 +22,7 @@ class SaveContactViewModel(private val repository: ContactsRepository) : ViewMod
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 repository.save(contact)
-                isShowMessageSuccess.postValue(true)
+                isShowMessageSuccess.postValue(SAVE_SUCCESS)
                 isBackContactFragment.postValue(true)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -30,12 +30,15 @@ class SaveContactViewModel(private val repository: ContactsRepository) : ViewMod
         }
     }
 
-    fun delete(contact: Contact) {
+    fun delete() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                repository.delete(contact)
-                isShowMessageSuccess.postValue(true)
-                isBackContactFragment.postValue(true)
+                _contact.value?.let {
+                    repository.delete(it)
+                    isShowMessageSuccess.postValue(DELETE_SUCCESS)
+                    isBackContactFragment.postValue(true)
+                }
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -46,7 +49,7 @@ class SaveContactViewModel(private val repository: ContactsRepository) : ViewMod
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 repository.edit(contact)
-                isShowMessageSuccess.postValue(true)
+                isShowMessageSuccess.postValue(UPDATE_SUCCESS)
                 isBackContactFragment.postValue(true)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -62,4 +65,9 @@ class SaveContactViewModel(private val repository: ContactsRepository) : ViewMod
         if (_contact.value != null) edit(contact) else save(contact)
     }
 
+    companion object {
+        private const val UPDATE_SUCCESS = "Contato atualizado"
+        private const val DELETE_SUCCESS = "Contato removido"
+        private const val SAVE_SUCCESS = "Contato adicionado"
+    }
 }

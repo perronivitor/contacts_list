@@ -26,14 +26,12 @@ class ContactsRepositoryImp(private val contactDao: ContactDao) : ContactsReposi
 
     override suspend fun delete(contact: Contact) {
         withContext(Dispatchers.IO){
-            println("DELETANDO CONTATO PARA $contact")
             contactDao.delete(contact)
         }
     }
 
     override suspend fun edit(contact: Contact) {
         withContext(Dispatchers.IO){
-            println("EDITANDO CONTATO PARA $contact")
             contactDao.edit(contact)
         }
     }

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
-import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -16,7 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.contacts_list_app.databinding.FragmentSaveContactBinding
 import com.example.contacts_list_app.validator.FormPhoneNumber
 import com.example.contacts_list_app.validator.ValidFormNumberWithDDD
-import com.example.contacts_list_app.validator.ValidacaoPadrao
+import com.example.contacts_list_app.validator.ValidatorDefault
 import com.example.contacts_list_app.validator.Validator
 import com.google.android.material.textfield.TextInputLayout
 
@@ -55,10 +54,11 @@ class SaveContactFragment : Fragment() {
             }
         }
 
-        viewModel.isShowMessageSuccess.observe(viewLifecycleOwner) { isShow ->
-            if (isShow) {
-                messageSuccess()
+        viewModel.isShowMessageSuccess.observe(viewLifecycleOwner) { message ->
+            if(!message.isNullOrEmpty()){
+                messageSuccess(message)
             }
+            viewModel.isShowMessageSuccess.postValue("")
         }
 
         viewModel.contact.observe(viewLifecycleOwner) { contact ->
@@ -79,10 +79,10 @@ class SaveContactFragment : Fragment() {
         }
     }
 
-    private fun messageSuccess() {
+    private fun messageSuccess(message: String) {
         Toast.makeText(
             requireContext(),
-            "Cadastro realizado com sucesso",
+            message,
             Toast.LENGTH_SHORT
         )
             .show()
@@ -93,9 +93,9 @@ class SaveContactFragment : Fragment() {
 
             confButtonSaveContact(formButtonSave)
 
-            addValidatorPadrao(formFirstName)
+            addValidatorDefault(formFirstName)
 
-            addValidatorPadrao(formSecondeName)
+            addValidatorDefault(formSecondeName)
 
             confFieldPhoneNumber(formPhoneNumber)
 
@@ -105,15 +105,7 @@ class SaveContactFragment : Fragment() {
 
     private fun confButtonDeleteContact(formButtonSave: Button) {
         formButtonSave.setOnClickListener {
-            viewModel.delete(
-                with(binding) {
-                    Contact(
-                        firstName = formFirstName.editText?.text.toString(),
-                        lastName = formSecondeName.editText?.text.toString(),
-                        phoneNumber = formPhoneNumber.editText?.text.toString()
-                    )
-                }
-            )
+            viewModel.delete()
         }
     }
 
@@ -123,6 +115,7 @@ class SaveContactFragment : Fragment() {
                 viewModel.actionButton(
                     with(binding) {
                         Contact(
+                            id = args.contact?.id ?: 0,
                             firstName = formFirstName.editText?.text.toString(),
                             lastName = formSecondeName.editText?.text.toString(),
                             phoneNumber = formPhoneNumber.editText?.text.toString()
@@ -137,8 +130,8 @@ class SaveContactFragment : Fragment() {
         binding.formButtonDelete.isVisible = isVisible
     }
 
-    private fun addValidatorPadrao(textInputLayout: TextInputLayout) {
-        val validator = ValidacaoPadrao(textInputLayout)
+    private fun addValidatorDefault(textInputLayout: TextInputLayout) {
+        val validator = ValidatorDefault(textInputLayout)
         validators.add(validator)
         textInputLayout.editText?.setOnFocusChangeListener { view, hasFocus ->
             if (validator.isValid()) return@setOnFocusChangeListener
@@ -148,12 +141,12 @@ class SaveContactFragment : Fragment() {
     private fun confFieldPhoneNumber(textFieldPhone: TextInputLayout) {
         val editTextPhone = textFieldPhone.editText
         val validatorPhone = ValidFormNumberWithDDD(textFieldPhone)
-        val formata = FormPhoneNumber()
+        val format = FormPhoneNumber()
         validators.add(ValidFormNumberWithDDD(textFieldPhone))
         editTextPhone?.setOnFocusChangeListener { view, hasFocus ->
-            val telefone = editTextPhone.text.toString()
+            val phone = editTextPhone.text.toString()
             if (hasFocus) {
-                editTextPhone.setText(formata.remove(telefone))
+                editTextPhone.setText(format.remove(phone))
             } else {
                 validatorPhone.isValid()
             }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">contacts_list_app</string>
+    <string name="error_loading_list">Erro ao carregar lista</string>
+    <string name="retry">Tentar novamente</string>
+    <string name="content_illustration_person_contact">Imagem ilustra uma pessoa</string>
+    <string name="person_data">Dados Pessoais</string>
+    <string name="save">Salvar</string>
+    <string name="phone_number">Número de Telefone</string>
+    <string name="second_name">Sobrenome</string>
+    <string name="first_name">Primeiro Nome</string>
+    <string name="label_contact_fragment">Lista de Contatos</string>
+    <string name="save_contact_fragment">Salvar Contato</string>
+    <string name="delete">Excluir</string>
+    <string name="number_digits_number_phone">Número de telefone dete ter entre 10 e 11 dígitos</string>
+    <string name="required_field">Campo obrigatório</string>
+</resources>
