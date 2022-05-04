@@ -1,5 +1,3 @@
-# contacts_list
-
 # 📚 Lista de Contatos APP
 
 >Status do projeto : Em desenvolvimento
